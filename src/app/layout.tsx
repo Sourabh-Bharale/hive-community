@@ -1,4 +1,6 @@
+import { Navbar } from '@/components'
 import { ThemeProvider } from '@/components/ui/theme-provider'
+import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
 import { Inter } from 'next/font/google'
@@ -21,8 +23,10 @@ export default function RootLayout({
     <html lang='en' className={cn('',inter.className)} suppressHydrationWarning>
       <body className='min-h-screen pt-12 '>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <Navbar/>
             {children}
-          </ThemeProvider>
+          <Toaster/>
+      </ThemeProvider>
       </body>
     </html>
   )

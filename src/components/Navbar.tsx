@@ -4,6 +4,7 @@ import {ChatBubbleLeftEllipsisIcon} from '@heroicons/react/24/outline'
 import { buttonVariants } from "./ui/Button"
 import { cn } from "@/lib/utils"
 import { getAuthSession } from "@/lib/auth"
+import UserAccountNav from "./UserAccountNav"
 const Navbar = async () => {
 
     const session = await getAuthSession()
@@ -22,9 +23,11 @@ const Navbar = async () => {
 
 
                 {/* signin */}
+                <div className="flex items-center gap-2">
+
                 {
                     session?.user ? (
-                        <p>{`hello ${session?.user.name}`}</p>
+                        <UserAccountNav user={session.user}/>
                     ):(
                         <Link href={'/sign-in'} className={buttonVariants()}>Sign In</Link>
                     )
@@ -32,6 +35,7 @@ const Navbar = async () => {
 
                 {/* themeToggle */}
                 <ThemeToggle />
+                </div>
 
             </div>
         </div>

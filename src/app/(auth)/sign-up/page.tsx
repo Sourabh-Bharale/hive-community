@@ -1,4 +1,4 @@
-import SignIn from "@/components/SignIn";
+import SignUp from "@/components/SignUp";
 import { buttonVariants } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
@@ -9,7 +9,7 @@ export default function page  () {
 
     <div className="absolute inset-0">
         <div className="h-full max-w-2xl mx-auto flex flex-col items-center justify-center gap-4">
-        <SignIn/>
+        <SignUp/>
             <Link
                 href={'/'}
                 className={cn(

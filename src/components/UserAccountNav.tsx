@@ -3,16 +3,15 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 import { User } from "next-auth"
 import UserAvatar from "./UserAvatar"
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "./ui/Button"
 import Link from "next/link"
 import { signOut } from "next-auth/react"
+import { buttonVariants } from "./ui/Button"
 
 interface UserAccountNavProps {
     user: Pick<User, 'name' | 'email' | 'image'>
@@ -36,7 +35,7 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
                         {user.email && <p className="w-[200px] truncate text-sm ">{user.email}</p>}
                     </div>
                 </div>
-                <DropdownMenuSeparator/>
+                <DropdownMenuSeparator />
 
                 <DropdownMenuItem asChild>
                     <Link href={'/'}>Feed</Link>
@@ -50,16 +49,17 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
                     <Link href={'/settings'}>settings</Link>
                 </DropdownMenuItem>
 
-                <DropdownMenuSeparator/>
+                <DropdownMenuSeparator />
 
                 <DropdownMenuItem
-                onSelect={(e)=>{
-                    e.preventDefault()
-                    signOut({
-                        callbackUrl: `${window.location.origin}/sign-in`,
-                    })
-                }}
-                  className={cn('cursor-pointer')}>
+
+                    className={cn('cursor-pointe')}
+                    onSelect={(e) => {
+                        e.preventDefault()
+                        signOut({   
+                            callbackUrl: `${window.location.origin}/sign-in`,
+                        })
+                    }}>
                     Sign out
                 </DropdownMenuItem>
 

@@ -13,7 +13,7 @@ export default function page  () {
             <Link
                 href={'/'}
                 className={cn(
-                    buttonVariants({ variant: "subtle" }),
+                    buttonVariants({ variant: "secondary" }),
                      'self-center  gap-2'
                     )}>
                         <ChevronLeftIcon className="w-4 h-4"/>Home

@@ -1,3 +1,4 @@
+import '@/styles/globals.css'
 import { TQueryProvider, ThemeProvider } from '@/Providers'
 import { Navbar } from '@/components'
 import { Toaster } from '@/components/ui/toaster'
@@ -29,7 +30,7 @@ export default function RootLayout({
             {/* @ts-expect-error server component */}
             <Navbar />
             {authModal}
-            <div className='container max-w-xl mx-auto h-full pt-12'>
+            <div className='container max-w-7xl mx-auto h-full pt-12'>
               {children}
             </div>
             <Toaster />

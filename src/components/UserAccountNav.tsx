@@ -42,7 +42,7 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
                 </DropdownMenuItem>
 
                 <DropdownMenuItem asChild>
-                    <Link href={'/suc/create'}>create new suc</Link>
+                    <Link href={'/r/create'}>create new suc</Link>
                 </DropdownMenuItem>
 
                 <DropdownMenuItem asChild>
@@ -56,7 +56,7 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
                     className={cn('cursor-pointe')}
                     onSelect={(e) => {
                         e.preventDefault()
-                        signOut({   
+                        signOut({
                             callbackUrl: `${window.location.origin}/sign-in`,
                         })
                     }}>

@@ -1,5 +1,5 @@
+import { TQueryProvider, ThemeProvider } from '@/Providers'
 import { Navbar } from '@/components'
-import { ThemeProvider } from '@/components/ui/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
@@ -11,7 +11,7 @@ export const metadata = {
 }
 
 const inter = Inter({
-  subsets:['latin']
+  subsets: ['latin']
 })
 
 export default function RootLayout({
@@ -22,17 +22,19 @@ export default function RootLayout({
   authModal: React.ReactNode
 }) {
   return (
-    <html lang='en' className={cn('',inter.className)} suppressHydrationWarning>
+    <html lang='en' className={cn('', inter.className)} suppressHydrationWarning>
       <body className='min-h-screen pt-12 '>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        {/* @ts-expect-error server component */}
-        <Navbar/>
-          {authModal}
-          <div className='container max-w-xl mx-auto h-full pt-12'>
-            {children}
+        <TQueryProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {/* @ts-expect-error server component */}
+            <Navbar />
+            {authModal}
+            <div className='container max-w-xl mx-auto h-full pt-12'>
+              {children}
             </div>
-          <Toaster/>
-      </ThemeProvider>
+            <Toaster />
+          </ThemeProvider>
+        </TQueryProvider>
       </body>
     </html>
   )

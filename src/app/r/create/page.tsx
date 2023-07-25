@@ -47,9 +47,10 @@ export default function Page() {
                     return loginToast()
                 }
             }
-            toast({
+            return toast({
                 title:'An Error Occured :(',
-                description:'Could not create subreddit, please try again in some time'
+                description:'Could not create subreddit, please try again in some time',
+                variant:'destructive'
             })
 
         },

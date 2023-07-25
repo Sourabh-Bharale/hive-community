@@ -3,6 +3,7 @@ import { db } from "@/lib/db"
 import { notFound } from "next/navigation"
 import { format } from 'date-fns'
 import { CalendarIcon, UsersIcon } from "@heroicons/react/24/outline"
+import SubscribeLeaveToggle from "@/components/SubscribeLeaveToggle"
 interface LayoutProps {
     children: React.ReactNode
     params: {
@@ -94,6 +95,10 @@ export default async function Layout({ children, params: { slug } }: LayoutProps
                                     </p>
                                 </div>
                             ) : null}
+                            {/* @ts-expect-error user id exists */}
+                            {subreddit.creatorId !== session?.user.id ? (
+                            <SubscribeLeaveToggle subredditId={subreddit.id} subredditName={subreddit.name} isSubscribed={isSubscribed}/>
+                            ):null}
                         </dl>
                     </div>
                 </div>

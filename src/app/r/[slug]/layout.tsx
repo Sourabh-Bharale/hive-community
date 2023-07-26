@@ -4,6 +4,8 @@ import { notFound } from "next/navigation"
 import { format } from 'date-fns'
 import { CalendarIcon, UsersIcon } from "@heroicons/react/24/outline"
 import SubscribeLeaveToggle from "@/components/SubscribeLeaveToggle"
+import Link from "next/link"
+import { buttonVariants } from "@/components/ui/Button"
 interface LayoutProps {
     children: React.ReactNode
     params: {
@@ -79,7 +81,7 @@ export default async function Layout({ children, params: { slug } }: LayoutProps
                             </div>
 
                             <div className="flex justify-between items-center gap-x-4 py-3">
-                            <dt className="flex items-center gap-2">
+                                <dt className="flex items-center gap-2">
                                     <p>Members</p>
                                     <UsersIcon className="w-4 h-4" />
                                 </dt>
@@ -97,8 +99,17 @@ export default async function Layout({ children, params: { slug } }: LayoutProps
                             ) : null}
                             {/* @ts-expect-error user id exists */}
                             {subreddit.creatorId !== session?.user.id ? (
-                            <SubscribeLeaveToggle subredditId={subreddit.id} subredditName={subreddit.name} isSubscribed={isSubscribed}/>
-                            ):null}
+                                <SubscribeLeaveToggle subredditId={subreddit.id} subredditName={subreddit.name} isSubscribed={isSubscribed} />
+                            ) : null}
+
+                            <Link
+                                className={buttonVariants({
+                                    variant: "secondary",
+                                    className: 'w-full '
+                                })}
+                                href={`r/${slug}/submit`}>
+                                Create Post
+                            </Link>
                         </dl>
                     </div>
                 </div>

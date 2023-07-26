@@ -30,7 +30,7 @@ const CustomImageRenderer = ({data}:any)=>{
 const CustomCodeRenderer = ({data}:any)=>{
 
     return (
-       <pre className="rounded-md p-4">
+       <pre className="w-fit rounded-md p-4">
         <code className="text-sm">{data.code}</code>
        </pre>
     )

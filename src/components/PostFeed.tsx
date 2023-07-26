@@ -66,7 +66,7 @@ export default function PostFeed({ initialPosts, subredditName }: PostFeedProps)
                         )
                     }
                     else {
-                        return <Post commentAmount={post.comments.length} post={post} subredditName={subredditName}/>
+                        return <Post key={post.id} commentAmount={post.comments.length} post={post} subredditName={subredditName}/>
                     }
 
                 })}

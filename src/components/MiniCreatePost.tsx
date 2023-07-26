@@ -15,9 +15,9 @@ export default function MiniCreatePost({session}:MiniCreatePostProps) {
     const pathname = usePathname()
     return (
         <>
-        <li className="overflow-hidden rounded-md ">
-            <div className="h-full px-6 py-4 flex justify-between gap-6">
-                <div className="relative">
+        <li className="overflow-hidden select-none rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
+            <div className="h-full  px-6 py-4 flex justify-between gap-6">
+                <div className="relative h-fit">
                     <UserAvatar user={{
                         name:session?.user?.name || null,
                         image:session?.user?.image || null,

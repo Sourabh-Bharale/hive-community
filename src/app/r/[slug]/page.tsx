@@ -1,4 +1,5 @@
 import MiniCreatePost from "@/components/MiniCreatePost"
+import PostFeed from "@/components/PostFeed"
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config"
 import { getAuthSession } from "@/lib/auth"
 import { db } from "@/lib/db"
@@ -33,11 +34,12 @@ export default async function ({ params }: PageProps) {
     if(!subreddit) return notFound()
 
     return (
-        <div className="select-none rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
+        <div className="flex flex-col gap-4">
             <h1 className="font-bold text-3xl md:text-4xl">
                 r/{subreddit.name}
             </h1>
             <MiniCreatePost session={session}/>
+            <PostFeed initialPosts={subreddit.posts}  subredditName={subreddit.name}/>
         </div>
     )
 }

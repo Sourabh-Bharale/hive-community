@@ -79,7 +79,7 @@ export default function PostVoteClient({
           })
 
     return (
-        <div className="flex md:flex-col gap-4 sm:gap-0 pr-6 pb-4 sm:w-20 sm:pb-0">
+        <div className="flex md:flex-col gap-1">
             <Button onClick={() => vote("UP")} size={'sm'} variant={'ghost'} aria-label="upvote">
                 <ArrowBigUp className={cn('w-5 h-5',
                     { 'text-teal-300 fill-teal-500': currentVote === 'UP' }

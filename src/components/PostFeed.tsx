@@ -71,7 +71,7 @@ export default function PostFeed({ initialPosts, subredditName }: PostFeedProps)
                         )
                     }
                     else {
-                        return <Post  currentVote={currentVote} votesAmount={voteAmount} key={post.id} commentAmount={post.comments.length} post={post} subredditName={post.subreddit.name}/>
+                        return <Post currentVote={currentVote} votesAmount={voteAmount} key={post.id} commentAmount={post.comments.length} post={post} subredditName={post.subreddit.name}/>
                     }
 
                 })}

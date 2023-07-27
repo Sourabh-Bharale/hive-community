@@ -1,14 +1,20 @@
-import { Button, buttonVariants } from "@/components/ui/Button";
+import CustomFeed from "@/components/CustomFeed";
+import GeneralFeed from "@/components/GeneralFeed";
+import { buttonVariants } from "@/components/ui/Button";
+import { getAuthSession } from "@/lib/auth";
 import { HomeIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Balancer from 'react-wrap-balancer'
-export default function Home() {
+export default async function Home() {
+
+  const session = await getAuthSession()
+
   return (
     <>
       <div className="font-bold text-3xl md:text-4xl">Feed</div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6">
-        {/* feed */}
-
+      <div className="flex md:flex-row flex-col gap-y-4 md:gap-x-4 py-6">
+      {/* @ts-expect-error server component */}
+      {session?<CustomFeed/>:<GeneralFeed />}
         {/* subreddit info */}
         <div className="overflow-hidden h-fit rounded-lg border order-first md:order-last">
           <div className="select-none rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">

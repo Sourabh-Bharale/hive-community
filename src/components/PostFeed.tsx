@@ -61,12 +61,12 @@ export default function PostFeed({ initialPosts, subredditName }: PostFeedProps)
                     if (index === posts.length - 1) {
                         return (
                             <li key={post.id} ref={ref}>
-                                <Post commentAmount={post.comments.length} post={post} subredditName={subredditName}/>
+                                <Post  currentVote={currentVote} votesAmount={voteAmount} commentAmount={post.comments.length} post={post} subredditName={subredditName}/>
                             </li>
                         )
                     }
                     else {
-                        return <Post key={post.id} commentAmount={post.comments.length} post={post} subredditName={subredditName}/>
+                        return <Post  currentVote={currentVote} votesAmount={voteAmount} key={post.id} commentAmount={post.comments.length} post={post} subredditName={subredditName}/>
                     }
 
                 })}

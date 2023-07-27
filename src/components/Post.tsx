@@ -6,7 +6,9 @@ import { useRef } from "react"
 import { MessageSquareIcon } from "lucide-react"
 import { cn } from '@/lib/utils'
 import EditorOutput from "./EditorOutput"
+import PostVoteClient from "./post-vote/PostVoteClient"
 
+type PartialVote = Pick<Vote,'type'>
 
 interface PostProps {
 subredditName : string,
@@ -15,15 +17,19 @@ post : Post & {
     votes:Vote[]
 },
 commentAmount : number,
+votesAmount:number,
+currentVote?:PartialVote
 }
-export default function Post({subredditName,post,commentAmount}:PostProps) {
+export default function Post({subredditName,post,commentAmount,votesAmount,currentVote}:PostProps) {
 
     const pRef = useRef<HTMLDivElement>(null)
 
     return (
     <div className="rounded-md shadow border">
         <div className="px-6 py-4 flex justify-between">
-            {/* Post Votes */}
+            <div className="md:block hidden">
+            <PostVoteClient postId={post.id} initialVotesAmount={votesAmount} initialVote={currentVote?.type} />
+            </div>
 
             <div className="w-0 flex-1">
                 <div className="max-h-40 mt-1 text-xs">
@@ -56,7 +62,10 @@ export default function Post({subredditName,post,commentAmount}:PostProps) {
             </div>
         </div>
 
-        <div className="z-20 text-sm p-4 sm:px-6">
+        <div className="flex z-20 text-sm p-4 sm:px-6">
+        <div className="block md:hidden">
+            <PostVoteClient postId={post.id} initialVotesAmount={votesAmount} initialVote={currentVote?.type} />
+        </div>
         <a className={cn('gap-2',buttonVariants({variant:"link"}))} href={`/r/${subredditName}`}>
             <MessageSquareIcon className="w-4 h-4"/>{commentAmount} comments
         </a>

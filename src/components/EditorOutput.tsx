@@ -7,6 +7,7 @@ const Output = dynamic(
         ssr: false,
     }
 )
+
 interface EditorOutputProps{
     content : any,
 }
@@ -28,7 +29,6 @@ const CustomImageRenderer = ({data}:any)=>{
 }
 
 const CustomCodeRenderer = ({data}:any)=>{
-
     return (
        <pre className="w-fit rounded-md p-4">
         <code className="text-sm">{data.code}</code>

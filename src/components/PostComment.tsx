@@ -82,12 +82,12 @@ export default function PostComment(
                 <UserAvatar
                     className={cn('h-6 w-6')}
                     user={{
-                        name: comment.author.name || null,
+                        name: comment.author.username || null,
                         image: comment.author.image || null
                     }} />
 
                 <div className="ml-2 flex items-center gap-x-2">
-                    <p className="text-sm font-medium">u/{comment.author.name}</p>
+                    <p className="text-sm font-medium">u/{comment.author.username}</p>
                     <p className="truncate text-xs">
                         {formatTimeToNow(new Date(comment.createdAt))}
                     </p>

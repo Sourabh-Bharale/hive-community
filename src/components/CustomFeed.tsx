@@ -42,7 +42,8 @@ export default async function CustomFeed() {
 
     return (
     <div className="flex flex-col gap-2 w-full h-full">
-    <h1 className="text-xs font-light">for u/{session?.user?.name}</h1>
+        {/* @ts-ignore */}
+    <h1 className="text-xs font-light">for u/{session?.user?.username}</h1>
     <Separator/>
     <PostFeed initialPosts={posts}/>
     </div>

@@ -8,15 +8,16 @@ import {
     CommandGroup,
     CommandItem
 } from "./ui/command";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Prisma, Subreddit } from "@prisma/client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { UsersIcon } from "@heroicons/react/24/outline";
 import { buttonVariants } from "./ui/Button";
 import debounce from "lodash.debounce";
 import { CommandDialog } from "cmdk";
 import { Skeleton } from "./ui/skeleton";
+import { useOnClickOutside } from "@/hooks/use-on-click-outside";
 
 interface SearchBarProps {
 
@@ -26,6 +27,17 @@ export default function SearchBar({ }: SearchBarProps) {
 
     const [input, setInput] = useState<string>('')
     const router = useRouter()
+    const pathname = usePathname()
+
+    const commandRef = useRef<HTMLDivElement>(null)
+
+    useOnClickOutside(commandRef,()=>{
+        setInput('')
+    })
+
+    useEffect(()=>{
+        setInput('')
+    },[pathname])
 
 
     const { data: queryResults, refetch, isFetched, isFetching } = useQuery({
@@ -50,7 +62,7 @@ export default function SearchBar({ }: SearchBarProps) {
 
 
     return (
-        <Command className="relative rounded-lg border  max-w-lg z-50 overflow-visible backdrop-blur-md">
+        <Command ref={commandRef} className="relative rounded-lg border  max-w-lg z-50 overflow-visible backdrop-blur-md">
             <CommandInput
                 value={input}
                 onValueChange={(text) => {

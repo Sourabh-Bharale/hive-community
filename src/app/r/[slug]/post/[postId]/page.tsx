@@ -36,7 +36,7 @@ export async function generateMetadata(
     })
     return {
       title:`r/${params.slug}/${post?.title}`,
-      description:`${post?.authorId} on r/${params.slug} Posted ${post?.content}`
+      description:`${post?.authorId} on r/${params.slug} Posted ${post?.title}`
     }
   }
 

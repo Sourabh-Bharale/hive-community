@@ -24,14 +24,16 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
                 <UserAvatar
                     className={cn('h-8 w-8')}
                     user={{
-                        name: user.name || null,
+                        // @ts-ignore
+                        name: user.username || null,
                         image: user.image || null
                     }} />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" >
                 <div className="flex  items-center justify-start gap-2">
                     <div className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
-                        {user.name && <p className="font-medium">{user.name}</p>}
+                        {/* @ts-ignore */}
+                        {user.username && <p className="font-medium">{user.username}</p>}
                         {user.email && <p className="w-[200px] truncate text-sm ">{user.email}</p>}
                     </div>
                 </div>

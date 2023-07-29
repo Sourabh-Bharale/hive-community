@@ -5,6 +5,8 @@ import { getAuthSession } from "@/lib/auth";
 import { HomeIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Balancer from 'react-wrap-balancer'
+
+export const dynamic = 'force-dynamic'
 export default async function Home() {
 
   const session = await getAuthSession()

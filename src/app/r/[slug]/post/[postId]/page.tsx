@@ -2,6 +2,7 @@ import CommentsSection from "@/components/CommentsSection"
 import EditorOutput from "@/components/EditorOutput"
 import PostVoteServer from "@/components/post-vote/PostVoteServer"
 import { Button } from "@/components/ui/Button"
+import { Label } from "@/components/ui/label"
 import { Skeleton } from "@/components/ui/skeleton"
 import { db } from "@/lib/db"
 import { redis } from "@/lib/redis"
@@ -70,8 +71,8 @@ export default async function Page({ params: { postId } }: PageParams) {
 
     return (
         <div>
-        <div className="h-full w-full flex flex-col sm:flex-row items-center sm:items-start justify-between">
-
+        <div className=" flex flex-col sm:flex-row items-center sm:items-start justify-between">
+            <div className="md:order-first order-last">
             <Suspense fallback={<PostVoteLoader />}>
                 {/* @ts-expect-error server component */}
                 <PostVoteServer
@@ -88,7 +89,8 @@ export default async function Page({ params: { postId } }: PageParams) {
                     }}
                 />
             </Suspense>
-            <div className="flex flex-col w-full p-4 rounded-sm ">
+            </div>
+            <div className=" flex flex-col overflow-x-clip p-4 rounded-sm ">
                 <p className="max-h-40 mt-1 truncate text-xs">
                     Posted by u/{post?.author.username ?? cachedPost.authorUsername}{" "}
                     {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
@@ -97,14 +99,21 @@ export default async function Page({ params: { postId } }: PageParams) {
                     {post?.title ?? cachedPost.title}
                 </h1>
                     {/* @ts-ignore server component */}
-                <EditorOutput content={post?.content ?? cachedPost.content} />
+                <Label htmlFor="code" className="my-2">
+                    <kbd className="border p-1 rounded-full">code</kbd>
+                </Label>
+                <div id="code" className="md:w-full md:max-w-none max-w-xs border rounded-xl overflow-x-scroll scrollbar-thin scrollbar-thumb-current scrollbar-thumb-rounded-sm">
 
-                <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                <EditorOutput content={post?.content ?? cachedPost.content} />
+                </div>
+
+
+            </div>
+        </div>
+        <Suspense fallback={<Skeleton className="w-full h-full" />}>
                     {/* @ts-ignore server component */}
                     <CommentsSection postId={post?.id ?? cachedPost.id} />
                 </Suspense>
-            </div>
-        </div>
         </div>
 
     )

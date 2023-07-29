@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={cn('', inter.className)} suppressHydrationWarning>
-      <body className='min-h-screen pt-12 '>
+      <body className='min-h-screen pt-12 scrollbar-thin scrollbar-thumb-current scrollbar-thumb-rounded-sm'>
         <TQueryProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {/* @ts-expect-error server component */}

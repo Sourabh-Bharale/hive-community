@@ -7,6 +7,7 @@ import axios from "axios"
 import { useSession } from "next-auth/react"
 import { useEffect, useRef } from "react"
 import Post from "./Post"
+import { Skeleton } from "./ui/skeleton"
 interface PostFeedProps {
     initialPosts: ExtendedPosts[],
     subredditName?: string
@@ -39,10 +40,10 @@ export default function PostFeed({ initialPosts, subredditName }: PostFeedProps)
     }
     )
 
-    useEffect(()=>{
-        if(entry?.isIntersecting)
+    useEffect(() => {
+        if (entry?.isIntersecting)
             fetchNextPage()
-    },[entry,fetchNextPage])
+    }, [entry, fetchNextPage])
 
     const posts = data?.pages.flatMap((page) => page) ?? initialPosts
 
@@ -66,15 +67,36 @@ export default function PostFeed({ initialPosts, subredditName }: PostFeedProps)
                     if (index === posts.length - 1) {
                         return (
                             <li key={post.id} ref={ref}>
-                                <Post  currentVote={currentVote} votesAmount={voteAmount} commentAmount={post.comments.length} post={post} subredditName={post.subreddit.name}/>
+                                <Post currentVote={currentVote} votesAmount={voteAmount} commentAmount={post.comments.length} post={post} subredditName={post.subreddit.name} />
                             </li>
                         )
                     }
                     else {
-                        return <Post currentVote={currentVote} votesAmount={voteAmount} key={post.id} commentAmount={post.comments.length} post={post} subredditName={post.subreddit.name}/>
+                        return <Post currentVote={currentVote} votesAmount={voteAmount} key={post.id} commentAmount={post.comments.length} post={post} subredditName={post.subreddit.name} />
                     }
 
                 })}
+
+
+            {isFetchingNextPage && (
+                <li className='flex justify-start w-full h-24 '>
+                    <div className="p-4 h-full">
+                        <Skeleton className="w-5 h-full" />
+                    </div>
+                    <div className="flex w-full flex-col p-2 gap-2">
+                        <div className="flex gap-2">
+                            <Skeleton className="w-12 h-4" />
+                            <Skeleton className="w-12 h-4" />
+                        </div>
+                        <div className="flex w-full h-full ">
+                            <Skeleton className="w-full h-full" />
+                        </div>
+                        <div className="flex gap-2">
+                            <Skeleton className="w-12 h-4" />
+                        </div>
+                    </div>
+                </li>
+            )}
         </ul>
     )
 }

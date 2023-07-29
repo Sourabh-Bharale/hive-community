@@ -83,3 +83,11 @@
 .link-tool__content--rendered{
   background:transparent !important;
 }
+
+/* pre{
+  @apply self-center lg:max-w-lg max-w-[16rem] h-72 border p-4 overflow-x-scroll  scrollbar-thin scrollbar-thumb-current scrollbar-thumb-rounded
+}
+
+code {
+  @apply max-w-xs
+} */

@@ -74,6 +74,7 @@
   "devDependencies": {
     "@types/editorjs__header": "^2.6.0",
     "@types/lodash.debounce": "^4.0.7",
-    "prisma": "^5.0.0"
+    "prisma": "^5.0.0",
+    "tailwind-scrollbar": "^3.0.4"
   }
 }

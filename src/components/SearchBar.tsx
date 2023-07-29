@@ -16,6 +16,7 @@ import { UsersIcon } from "@heroicons/react/24/outline";
 import { buttonVariants } from "./ui/Button";
 import debounce from "lodash.debounce";
 import { CommandDialog } from "cmdk";
+import { Skeleton } from "./ui/skeleton";
 
 interface SearchBarProps {
 
@@ -59,6 +60,12 @@ export default function SearchBar({ }: SearchBarProps) {
                 className="outline-none focus:outline-none border-none focus:border-none ring-0"
                 placeholder='Search...'
             />
+            {isFetching?(
+                <div className="flex items-center gap-2 p-4">
+                    <Skeleton className="w-4 h-4"/>
+                    <Skeleton className="w-full h-8"/>
+                </div>
+            ):null}
             {input.length > 0 ? (
                 <CommandList className="mt-2 absolute top-full inset-x-0 border bg-white dark:bg-[#030711] shadow p-4 rounded-md">
                     {isFetched && <CommandEmpty>No results found...</CommandEmpty>}

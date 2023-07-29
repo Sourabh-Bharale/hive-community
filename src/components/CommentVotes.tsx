@@ -1,48 +1,44 @@
 'use client'
 import { useCustomToast } from "@/hooks/use-custom-toast"
 import { usePrevious } from "@mantine/hooks"
-import { VoteType } from "@prisma/client"
-import { useEffect, useState } from "react"
-import { Button } from "../ui/Button"
+import { CommentVote, VoteType } from "@prisma/client"
+import {  useState } from "react"
+
 import { cn } from "@/lib/utils"
 import { ArrowBigDown, ArrowBigUp } from "lucide-react"
-import { useMutation, useQuery } from "@tanstack/react-query"
-import { PostVoteRequest } from "@/lib/validators/vote"
+import { useMutation } from "@tanstack/react-query"
+import { CommentVoteRequest } from "@/lib/validators/vote"
 import axios, { AxiosError } from "axios"
 import { toast } from "@/hooks/use-toast"
+import { Button } from "./ui/Button"
 
-interface PostVoteClientProps {
-    postId: string
+interface CommentVotesProps {
+    commentId: string
     initialVotesAmount: number
-    initialVote?: VoteType | null
+    initialVote?: Pick<CommentVote, 'type'>
   }
-export default function PostVoteClient({
-    postId,
+export default function CommentVotes({
+    commentId,
     initialVotesAmount,
     initialVote,
-}: PostVoteClientProps) {
+}: CommentVotesProps) {
 
     const { loginToast } = useCustomToast()
     const [votesAmount, setVotesAmount] = useState<number>(initialVotesAmount)
     const [currentVote, setCurrentVote] = useState(initialVote)
     const prevVote = usePrevious(currentVote)
 
-    // sync with server incase initial votes are undefined
-    useEffect(() => {
-        setCurrentVote(initialVote)
-    }, [initialVote])
 
     const { mutate: vote } = useMutation({
         mutationFn: async (type: VoteType) => {
-            const payload: PostVoteRequest = {
+            const payload: CommentVoteRequest = {
               voteType: type,
-              postId: postId,
+              commentId: commentId,
             }
 
-            await axios.patch('/api/subreddit/post/vote', payload)
+            await axios.patch('/api/subreddit/post/comment/vote', payload)
           },
           onError: (err, voteType) => {
-
 
             if (voteType === 'UP') setVotesAmount((prev) => prev - 1)
             else setVotesAmount((prev) => prev + 1)
@@ -62,15 +58,15 @@ export default function PostVoteClient({
                 variant: 'destructive'
             })
         },
-        onMutate: (type: VoteType) => {
-            if (currentVote === type) {
+        onMutate: (type) => {
+            if (currentVote?.type === type) {
                 // User is voting the same way again, so remove their vote
                 setCurrentVote(undefined)
                 if (type === 'UP') setVotesAmount((prev) => prev - 1)
                 else if (type === 'DOWN') setVotesAmount((prev) => prev + 1)
               } else {
                 // User is voting in the opposite direction, so subtract 2
-                setCurrentVote(type)
+                setCurrentVote({type})
                 if (type === 'UP') setVotesAmount((prev) => prev + (currentVote ? 2 : 1))
                 else if (type === 'DOWN')
                   setVotesAmount((prev) => prev - (currentVote ? 2 : 1))
@@ -80,10 +76,10 @@ export default function PostVoteClient({
 
 
     return (
-        <div className="flex md:flex-col gap-1">
+        <div className="flex gap-1">
             <Button onClick={() => vote("UP")} size={'sm'} variant={'ghost'} aria-label="upvote">
                 <ArrowBigUp className={cn('w-5 h-5',
-                    { 'text-teal-500 fill-teal-500': currentVote === 'UP' }
+                    { 'text-teal-300 fill-teal-500': currentVote?.type === 'UP' }
                 )} />
             </Button>
 
@@ -93,7 +89,7 @@ export default function PostVoteClient({
 
             <Button onClick={() => vote("DOWN")} size={'sm'} variant={'ghost'} aria-label="downvote">
                 <ArrowBigDown className={cn('w-5 h-5',
-                    { 'text-rose-500 fill-rose-500': currentVote === 'DOWN' }
+                    { 'text-rose-500 fill-rose-500': currentVote?.type === 'DOWN' }
                 )} />
             </Button>
 

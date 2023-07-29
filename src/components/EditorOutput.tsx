@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic"
 import Image from "next/image"
+import { Suspense } from "react"
 
 const Output = dynamic(
     async()=>(await import('editorjs-react-renderer')).default,
@@ -44,7 +45,9 @@ const renderers = {
 }
 
 export default function EditorOutput({content}:EditorOutputProps) {
-  return (
+
+
+    return (
     <Output style={style} data={content} className='text-sm' renderers={renderers}/>
   )
 }

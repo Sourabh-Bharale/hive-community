@@ -1,3 +1,4 @@
+import CommentsSection from "@/components/CommentsSection"
 import EditorOutput from "@/components/EditorOutput"
 import PostVoteServer from "@/components/post-vote/PostVoteServer"
 import { Button } from "@/components/ui/Button"
@@ -48,7 +49,8 @@ export default async function Page({ params: { postId } }: PageParams) {
 
 
     return (
-        <div className="h-full w-full flex flex-col sm:flex-row items-center sm:items-start justify-between border p-2">
+        <div>
+        <div className="h-full w-full flex flex-col sm:flex-row items-center sm:items-start justify-between">
 
             <Suspense fallback={<PostVoteLoader />}>
                 {/* @ts-expect-error server component */}
@@ -74,13 +76,17 @@ export default async function Page({ params: { postId } }: PageParams) {
                 <h1 className="text-2xl font-semibold py-2 leading-6 ">
                     {post?.title ?? cachedPost.title}
                 </h1>
-                <div className="">
+                    {/* @ts-ignore server component */}
                 <EditorOutput content={post?.content ?? cachedPost.content} />
-                </div>
+
+                <Suspense fallback={<Skeleton className="w-full h-full" />}>
+                    {/* @ts-ignore server component */}
+                    <CommentsSection postId={post?.id ?? cachedPost.id} />
+                </Suspense>
             </div>
-
-
         </div>
+        </div>
+
     )
 }
 

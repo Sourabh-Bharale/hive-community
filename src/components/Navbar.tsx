@@ -5,6 +5,8 @@ import { buttonVariants } from "./ui/Button"
 import { cn } from "@/lib/utils"
 import { getAuthSession } from "@/lib/auth"
 import UserAccountNav from "./UserAccountNav"
+import SearchBar from "./SearchBar"
+import { Input } from "./ui/input"
 const Navbar = async () => {
 
     const session = await getAuthSession()
@@ -19,14 +21,13 @@ const Navbar = async () => {
                     <p className="hidden md:flex font-medium ">Suc-it</p>
                 </Link>
 
-                {/* search bar */}
 
+                <SearchBar/>
 
                 {/* signin */}
                 <div className="flex items-center gap-2">
 
-                {
-                    session?.user ? (
+                {session?.user ? (
                         <UserAccountNav user={session.user}/>
                     ):(
                         <Link href={'/sign-in'} className={buttonVariants()}>Sign In</Link>

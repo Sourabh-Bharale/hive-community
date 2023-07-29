@@ -1,6 +1,15 @@
 import CloseModal from "@/components/CloseModal"
 import SignIn from "@/components/SignIn"
+import { Metadata } from "next"
 
+export const metadata:Metadata={
+    title:'Sign in to Suc-it',
+    description:'Sign in to your Suc-it account',
+    creator:'Suc-it',
+    openGraph:{
+        images:''
+    }
+}
 
 export default function page(){
     return (

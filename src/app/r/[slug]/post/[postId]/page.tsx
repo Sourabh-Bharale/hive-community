@@ -10,6 +10,7 @@ import { CachedPost } from "@/types/redis"
 import { Post, User, Vote } from "@prisma/client"
 import { ArrowBigDown } from "lucide-react"
 import { ArrowBigUp } from "lucide-react"
+import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
 
@@ -18,9 +19,27 @@ export const fetchCache = 'force-no-store'
 
 interface PageParams {
     params: {
+        slug:string
         postId: string
     }
 }
+
+export async function generateMetadata(
+    { params }: PageParams,
+  ): Promise<Metadata> {
+
+    // fetch metadata
+    const post = await db.post.findFirst({
+        where: {
+            id: params.postId
+        },
+    })
+    return {
+      title:`r/${params.slug}/${post?.title}`
+    }
+  }
+
+
 export default async function Page({ params: { postId } }: PageParams) {
 
     const cachedPost = (

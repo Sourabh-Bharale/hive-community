@@ -2,7 +2,17 @@ import SignUp from "@/components/SignUp";
 import { buttonVariants } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata:Metadata={
+    title:'Sign up to Suc-it',
+    description:'Sign up to create a new account to Suc-it',
+    creator:'Suc-it',
+    openGraph:{
+        images:''
+    }
+}
 
 export default function page  () {
     return(

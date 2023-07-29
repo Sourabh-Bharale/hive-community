@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { ThemeToggle } from "./themeToggle"
-import {ChatBubbleLeftEllipsisIcon} from '@heroicons/react/24/outline'
+import {ArrowRightOnRectangleIcon, ChatBubbleLeftEllipsisIcon} from '@heroicons/react/24/outline'
 import { buttonVariants } from "./ui/Button"
 import { cn } from "@/lib/utils"
 import { getAuthSession } from "@/lib/auth"
@@ -10,7 +10,6 @@ import { Input } from "./ui/input"
 const Navbar = async () => {
 
     const session = await getAuthSession()
-
 
     return (
         <div className="fixed top-0 inset-x-0 h-fit z-[10] py-2 backdrop-blur-2xl">
@@ -30,7 +29,10 @@ const Navbar = async () => {
                 {session?.user ? (
                         <UserAccountNav user={session.user}/>
                     ):(
-                        <Link href={'/sign-in'} className={buttonVariants()}>Sign In</Link>
+                        <Link href={'/sign-in'} className={buttonVariants({size:'sm'})}>
+                                <p className="md:block hidden">Sign in</p>
+                            <ArrowRightOnRectangleIcon className="md:hidden w-5 h-5"/>
+                        </Link>
                     )
                 }
 

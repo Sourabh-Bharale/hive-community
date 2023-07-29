@@ -2,7 +2,17 @@ import SignIn from "@/components/SignIn";
 import { buttonVariants } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata:Metadata={
+    title:'Sign in to Suc-it',
+    description:'Sign in to your Suc-it account',
+    creator:'Suc-it',
+    openGraph:{
+        images:''
+    }
+}
 
 export default function page  () {
     return(

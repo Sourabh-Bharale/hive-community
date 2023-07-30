@@ -3,6 +3,8 @@ import { db } from "@/lib/db"
 import { Separator } from "./ui/separator"
 import PostComment from "./PostComment"
 import CreateComment from "./CreateComment"
+import { Button } from "./ui/Button"
+import CommentReplies from "./CommentReplies"
 
 interface CommentsSectionProps {
     postId: string
@@ -10,7 +12,6 @@ interface CommentsSectionProps {
 
 export default async function CommentsSection({ postId }: CommentsSectionProps) {
     const session = await getAuthSession()
-
     const comments = await db.comment.findMany({
         where: {
             postId,
@@ -33,7 +34,7 @@ export default async function CommentsSection({ postId }: CommentsSectionProps) 
             <Separator className="my-6" />
 
             {/* create comment */}
-            <CreateComment postId={postId} />
+            <CreateComment postId={postId}/>
 
             <div className="flex flex-col gap-y-6 mt-4">
                 {comments
@@ -60,31 +61,40 @@ export default async function CommentsSection({ postId }: CommentsSectionProps) 
                                         comment={topLevelComment}
                                     />
                                 </div>
-                                {topLevelComment.replies
-                                    .sort((a, b) => b.votes.length - a.votes.length)
-                                    .map((reply) => {
 
-                                        const replyVotesAmount = reply.votes.reduce((acc, vote) => {
-                                            if (vote.type === "UP") return acc + 1
-                                            if (vote.type === "DOWN") return acc - 1
-                                            return acc
-                                        }, 0)
+                                {topLevelComment.replies.length>0 ? (
+                                    <CommentReplies>
+                                        {topLevelComment.replies
+                                            .sort((a, b) => b.votes.length - a.votes.length)
+                                            .map((reply) => {
 
-                                        const replyVote = reply.votes.find(
-                                            // @ts-ignore
-                                            (vote) => vote.userId === session?.user.id
-                                        )
+                                                const replyVotesAmount = reply.votes.reduce((acc, vote) => {
+                                                    if (vote.type === "UP") return acc + 1
+                                                    if (vote.type === "DOWN") return acc - 1
+                                                    return acc
+                                                }, 0)
 
-                                        return <div key={reply.id} className="ml-2 py-2 pl-4 border-l-2">
-                                            <PostComment
-                                                comment={reply}
-                                                postId={postId}
-                                                votesAmount={replyVotesAmount}
-                                                currentVote={replyVote}
-                                            />
-                                        </div>
-                                    })
-                                }
+                                                const replyVote = reply.votes.find(
+                                                    // @ts-ignore
+                                                    (vote) => vote.userId === session?.user.id
+                                                )
+
+                                                return (
+                                                    <div key={reply.id} className="relative gap-2 py-2 border-l-2">
+                                                        <PostComment
+                                                            className="relative -left-3 pt-4"
+                                                            comment={reply}
+                                                            postId={postId}
+                                                            votesAmount={replyVotesAmount}
+                                                            currentVote={replyVote}
+                                                        />
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </CommentReplies>
+                                ) : null}
+
                             </div>
                         )
                     })}

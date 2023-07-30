@@ -1,11 +1,11 @@
 'use client'
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import UserAvatar from "./UserAvatar"
 import { cn, formatTimeToNow } from "@/lib/utils"
 import { Comment, CommentVote, User } from "@prisma/client"
 import CommentVotes from "./CommentVotes"
-import { Button } from "./ui/Button"
+import { Button, buttonVariants } from "./ui/Button"
 import { MessageSquareIcon } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { notFound, useRouter } from "next/navigation"
@@ -16,6 +16,7 @@ import { CommentRequest } from "@/lib/validators/comment"
 import axios, { AxiosError } from "axios"
 import { toast } from "@/hooks/use-toast"
 import { useCustomToast } from "@/hooks/use-custom-toast"
+import { Badge } from "./ui/badge"
 
 type ExtendedComment = Comment & {
     votes: CommentVote[],
@@ -24,12 +25,14 @@ type ExtendedComment = Comment & {
 
 interface PostCommentProp {
     comment: ExtendedComment
+    className?: string
     postId: string
     votesAmount: number
     currentVote?: CommentVote | undefined
 }
 export default function PostComment(
     { comment,
+        className,
         postId,
         votesAmount,
         currentVote
@@ -40,7 +43,8 @@ export default function PostComment(
     const commentRef = useRef<HTMLDivElement>(null)
     const [input, setInput] = useState<string>('')
     const [isReplying, setIsReplying] = useState<boolean>(false)
-    const {loginToast} = useCustomToast()
+    const { loginToast } = useCustomToast()
+    const tagUser = (comment.author.username) as string
 
     const { mutate: postComment, isLoading: isCommentPosting } = useMutation({
         mutationFn: async ({ postId, text, replyToId }: CommentRequest) => {
@@ -76,9 +80,12 @@ export default function PostComment(
         }
     })
 
+    useEffect(() => {
+        setInput(`@${tagUser}` );
+      }, []);
     return (
-        <div ref={commentRef} className="flex flex-col">
-            <div className="flex items-center">
+        <div ref={commentRef} className={`flex flex-col`}>
+            <div className={`flex items-center ${className}`}>
                 <UserAvatar
                     className={cn('h-6 w-6')}
                     user={{
@@ -94,7 +101,7 @@ export default function PostComment(
                 </div>
             </div>
 
-            <p className="text-sm mt-2">{comment.text}</p>
+            <p className="text-sm mt-2 pl-8">{comment.text}</p>
             <div className="flex flex-wrap gap-2 items-center">
                 <CommentVotes commentId={comment.id}
                     initialVotesAmount={votesAmount}
@@ -112,12 +119,14 @@ export default function PostComment(
                 {
                     isReplying ? (
 
-                        <div className="block w-full gap-1.5">
+                        <div className="block w-full gap-1.5 pl-4">
                             <Label htmlFor="comment" >Your Commet</Label>
-                            <div className="mt-2">
+                            <div className=" mt-2">
                                 <Textarea id="comment"
-                                    value={input} onChange={(e) => setInput(e.target.value)}
-                                    placeholder="what's on your mind...?" />
+                                    value={input} onChange={(e) =>{
+                                        setInput(e.target.value)
+                                    } }
+                                />
 
                                 <div className="mt-2 flex items-center gap-2 justify-end">
                                     <Button

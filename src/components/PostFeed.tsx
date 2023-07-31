@@ -10,9 +10,10 @@ import Post from "./Post"
 import { Skeleton } from "./ui/skeleton"
 interface PostFeedProps {
     initialPosts: ExtendedPosts[],
-    subredditName?: string
+    subredditName?: string,
+    tabType?:string
 }
-export default function PostFeed({ initialPosts, subredditName }: PostFeedProps) {
+export default function PostFeed({ initialPosts, subredditName,tabType }: PostFeedProps) {
     const { data: session } = useSession()
     const lastPostRef = useRef<HTMLElement>(null)
     const { ref, entry } = useIntersection({
@@ -25,7 +26,8 @@ export default function PostFeed({ initialPosts, subredditName }: PostFeedProps)
         async ({ pageParam = 1 }) => {
             const query =
                 `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
-                (!!subredditName ? `&subredditName=${subredditName}` : '')
+                (!!subredditName ? `&subredditName=${subredditName}` : '') + `&tabType=${tabType}`
+
 
             const { data } = await axios.get(query)
             return data as ExtendedPosts[]

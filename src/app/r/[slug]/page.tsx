@@ -61,7 +61,7 @@ export default async function ({ params }: PageProps) {
                 r/{subreddit.name}
             </h1>
             <MiniCreatePost session={session}/>
-            <PostFeed initialPosts={subreddit.posts}  subredditName={subreddit.name}/>
+            <PostFeed tabType={'false'} initialPosts={subreddit.posts}  subredditName={subreddit.name}/>
         </div>
     )
 }

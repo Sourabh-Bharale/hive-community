@@ -3,7 +3,11 @@ import { db } from "@/lib/db"
 import PostFeed from "./PostFeed"
 import { Separator } from "./ui/separator"
 
-export default async function GeneralFeed() {
+interface GeneralFeedProps  {
+    tabType?:string
+}
+
+export default async function GeneralFeed({tabType}:GeneralFeedProps) {
     const posts = await db.post.findMany({
         orderBy:{
             createdAt:'desc',
@@ -20,7 +24,7 @@ export default async function GeneralFeed() {
     <div className="flex flex-col gap-2 w-full h-full">
     <h1 className="text-xs font-light">explore...</h1>
     <Separator/>
-    <PostFeed initialPosts={posts}/>
+    <PostFeed tabType={tabType} initialPosts={posts}/>
     </div>
   )
 }

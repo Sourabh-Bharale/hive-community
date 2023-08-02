@@ -28,7 +28,7 @@ export default async function Page({ params }: PageProps) {
                     Create Post
                 </h1>
                 <p className="ml-2 mt-1 truncate text-sm ">
-                    in r/{params.slug}
+                    in hub/{params.slug}
                 </p>
             </div>
         </div>

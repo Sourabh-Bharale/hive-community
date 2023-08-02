@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="font-bold text-3xl md:text-4xl">Feed</div>
+      <div className="font-bold text-3xl md:text-4xl">Buzz</div>
       <div className="flex md:flex-row flex-col gap-y-4 md:gap-x-4 py-6">
       {/* @ts-expect-error server component */}
       {session?<CustomFeed/>:<GeneralFeed />}
@@ -30,13 +30,13 @@ export default async function Home() {
             <div className="flex justify-between gap-x-4 py-3">
               <p className="flex w-full">
                 <Balancer>
-                  your own personalised suc-it . check out latest activity in your favourite suc communities
+                  your own personalised Hive . check out latest activity in your favourite HiveHubs
                 </Balancer>
               </p>
             </div>
 
-            <Link className={buttonVariants({className:'w-full mt-4 mb-6'})} href={'/r/create'}>
-              Create Suc
+            <Link className={buttonVariants({className:'w-full mt-4 mb-6'})} href={'/hub/create'}>
+              Create HiveHub
             </Link>
           </div>
         </div>

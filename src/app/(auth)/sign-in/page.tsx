@@ -6,9 +6,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata:Metadata={
-    title:'Sign in to Suc-it',
-    description:'Sign in to your Suc-it account',
-    creator:'Suc-it',
+    title:'Sign in to Hive',
+    description:'Sign in to your Hive account',
+    creator:'Hive',
     openGraph:{
         images:''
     }

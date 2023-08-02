@@ -1,8 +1,7 @@
 import { UserNameForm } from "@/components/UserNameForm"
-import { authOptions, getAuthSession } from "@/lib/auth"
+import { getAuthSession } from "@/lib/auth"
 import { SettingsIcon } from "lucide-react"
 import { Metadata } from "next"
-import { redirect } from "next/navigation"
 
 export const metadata:Metadata={
     title:'Settings',
@@ -12,10 +11,6 @@ export const metadata:Metadata={
 export default async function Page() {
 
     const session = await getAuthSession()
-
-    if(!session?.user)
-        redirect(authOptions.pages?.signIn||'sign-in')
-
 
   return (
     <div className="flex flex-col gap-4 max-w-4xl mx-auto py-12">

@@ -54,7 +54,7 @@ export default function CreateNewCommunity() {
 
         },
         onSuccess: (data) => {
-            router.push(`/r/${data}`)
+            router.push(`/hub/${data}`)
         }
 
     })
@@ -65,15 +65,15 @@ export default function CreateNewCommunity() {
                 <p className="text-lg font-medium">Name</p>
                 <p className="text-xs pb-2">
                     <Balancer>
-                        Community names including capitalization cannot be changed.
+                        HiveHub names including capitalization cannot be changed.
                     </Balancer>
                 </p>
 
                 <div className="relative">
-                    <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center ">
-                        r/
+                    <p className="absolute text-sm left-1 w-8 inset-y-0 grid place-items-center ">
+                        hub/
                     </p>
-                    <Input value={input} onChange={(e) => setInput(e.target.value)} className="pl-6" />
+                    <Input value={input} onChange={(e) => setInput(e.target.value)} className="pl-9" />
                 </div>
             </div>
 

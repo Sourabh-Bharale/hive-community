@@ -64,7 +64,7 @@ export default async function Layout({ children, params: { slug } }: LayoutProps
                     {/* info sidebar */}
                     <div className="hidden md:block overflow-hidden h-fit rounded-lg border order-first md:order-last">
                         <div className="px-6 py-4">
-                            <p className="font-semibold py-3">About r/{subreddit.name}</p>
+                            <p className="font-semibold py-3">About hub/{subreddit.name}</p>
                         </div>
 
                         <dl className="divide-y px-6 py-4 text-sm leading-6">
@@ -93,7 +93,7 @@ export default async function Layout({ children, params: { slug } }: LayoutProps
                             {subreddit.creatorId === session?.user.id ? (
                                 <div className="flex justify-between gap-x-4 py-3">
                                     <p>
-                                        You created this Suc
+                                        You created this Hub
                                     </p>
                                 </div>
                             ) : null}
@@ -107,7 +107,7 @@ export default async function Layout({ children, params: { slug } }: LayoutProps
                                     variant: "secondary",
                                     className: 'w-full '
                                 })}
-                                href={`r/${slug}/submit`}>
+                                href={`hub/${slug}/submit`}>
                                 Create Post
                             </Link>
                         </dl>

@@ -3,9 +3,9 @@ import SignUp from "@/components/SignUp"
 import { Metadata } from "next"
 
 export const metadata:Metadata={
-    title:'Sign up to Suc-it',
-    description:'Sign up to create a new account to Suc-it',
-    creator:'Suc-it',
+    title:'Sign up to Hive',
+    description:'Sign up to create a new account to Hive',
+    creator:'Hive',
     openGraph:{
         images:''
     }

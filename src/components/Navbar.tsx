@@ -17,7 +17,7 @@ const Navbar = async () => {
                 {/* Logo */}
                 <Link href={'/'} className="flex gap-2 items-center">
                     <ChatBubbleLeftEllipsisIcon className={cn(buttonVariants({variant:"ghost",className:'rounded-full'}))}/>
-                    <p className="hidden md:flex font-medium ">Suc-it</p>
+                    <p className="hidden md:flex font-medium ">Hive</p>
                 </Link>
 
 

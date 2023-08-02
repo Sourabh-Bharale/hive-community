@@ -24,7 +24,7 @@ export async function generateMetadata(
         },
     })
     return {
-      title: `r/${subreddit?.name}`,
+      title: `hub/${subreddit?.name}`,
       description:`created by ${subreddit?.creatorId}`
     }
   }
@@ -58,7 +58,7 @@ export default async function ({ params }: PageProps) {
     return (
         <div className="flex flex-col gap-4">
             <h1 className="font-bold text-3xl md:text-4xl">
-                r/{subreddit.name}
+                hub/{subreddit.name}
             </h1>
             <MiniCreatePost session={session}/>
             <PostFeed tabType={'false'} initialPosts={subreddit.posts}  subredditName={subreddit.name}/>

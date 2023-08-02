@@ -44,7 +44,7 @@ export default function UserAccountNav({ user }: UserAccountNavProps) {
                 </DropdownMenuItem>
 
                 <DropdownMenuItem asChild>
-                    <Link href={'/r/create'}>create new suc</Link>
+                    <Link href={'/hub/create'}>create new hub</Link>
                 </DropdownMenuItem>
 
                 <DropdownMenuItem asChild>

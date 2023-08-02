@@ -15,7 +15,7 @@ export default function SignIn() {
                 <UserAuthForm/>
 
                 <p className="px-8 text-center text-sm">
-                    New to Suc-it?{' '}
+                    New to Hive?{' '}
                     <Link
                         href={'/sign-up'}
                         className="text-sm underline underline-offset-4">

@@ -3,6 +3,7 @@ import EditorOutput from "@/components/EditorOutput"
 import PostVoteServer from "@/components/post-vote/PostVoteServer"
 import { Button } from "@/components/ui/Button"
 import { Label } from "@/components/ui/label"
+import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 import { db } from "@/lib/db"
 import { redis } from "@/lib/redis"
@@ -36,8 +37,8 @@ export async function generateMetadata(
         },
     })
     return {
-      title:`r/${params.slug}/${post?.title}`,
-      description:`${post?.authorId} on r/${params.slug} Posted ${post?.title}`
+      title:`hub/${params.slug}/${post?.title}`,
+      description:`${post?.authorId} on hub/${params.slug} Posted ${post?.title}`
     }
   }
 
@@ -90,7 +91,7 @@ export default async function Page({ params: { postId } }: PageParams) {
                 />
             </Suspense>
             </div>
-            <div className=" flex flex-col overflow-x-clip p-4 rounded-sm ">
+            <div className=" flex flex-col overflow-x-clip p-4 rounded-sm">
                 <p className="max-h-40 mt-1 truncate text-xs">
                     Posted by u/{post?.author.username ?? cachedPost.authorUsername}{" "}
                     {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
@@ -98,11 +99,11 @@ export default async function Page({ params: { postId } }: PageParams) {
                 <h1 className="text-2xl font-semibold py-2 leading-6 ">
                     {post?.title ?? cachedPost.title}
                 </h1>
+
+                <Separator/>
                     {/* @ts-ignore server component */}
-                <Label htmlFor="code" className="my-2">
-                    <kbd className="border p-1 rounded-full">code</kbd>
-                </Label>
-                <div id="code" className="md:w-full md:max-w-none max-w-xs border rounded-xl overflow-x-scroll scrollbar-thin scrollbar-thumb-current scrollbar-thumb-rounded-sm">
+
+                <div className="md:w-full md:max-w-none max-w-xs rounded-xl overflow-x-scroll scrollbar-thin scrollbar-thumb-current scrollbar-thumb-rounded-sm mt-4">
 
                 <EditorOutput content={post?.content ?? cachedPost.content} />
                 </div>

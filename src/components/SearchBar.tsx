@@ -85,12 +85,12 @@ export default function SearchBar({ }: SearchBarProps) {
                         <CommandGroup heading='Communities'>
                             {queryResults?.map((subreddit) => (
                                 <CommandItem className="flex items-center gap-2" key={subreddit.id} value={subreddit.name} onSelect={(e) => {
-                                    router.push(`/r/${e}`)
+                                    router.push(`/hub/${e}`)
                                     router.refresh()
                                     setInput('')
                                 }}>
                                     <UsersIcon className=" h-4 w-4" />
-                                    <a href={`/r/${subreddit.name}`}>r/{subreddit.name}</a>
+                                    <a href={`/hub/${subreddit.name}`}>hub/{subreddit.name}</a>
                                 </CommandItem>
                             ))}
                         </CommandGroup>

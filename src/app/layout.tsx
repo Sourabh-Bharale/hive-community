@@ -8,7 +8,8 @@ import { Inter } from 'next/font/google'
 
 
 export const metadata = {
-  title: 'suc-it',
+  title: 'Hive',
+  description: 'Welcome to Hive - Your Personalized Community Platform! Create your own HiveHub, connect with like-minded individuals, and share your passions. Join today to post, interact, and discover a vibrant world of diverse content. Unleash your creativity and be part of a buzzing hive of inspiration and engagement. Sign up now and experience the power of community-driven connections.'
 }
 
 const inter = Inter({

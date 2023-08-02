@@ -46,7 +46,7 @@ export default function SubscribeLeaveToggle({ subredditId , subredditName , isS
             })
             return toast({
                 title:'Subscribed',
-                description:`You are now subscribed to r/${subredditName}`
+                description:`You are now subscribed to hub/${subredditName}`
             })
         }
     })
@@ -86,7 +86,7 @@ export default function SubscribeLeaveToggle({ subredditId , subredditName , isS
             })
             return toast({
                 title:'Unsubscribed',
-                description:`You are now unsubscribed from r/${subredditName}`
+                description:`You are now unsubscribed from hub/${subredditName}`
             })
         }
     })

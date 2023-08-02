@@ -80,8 +80,21 @@
   }
 }
 
-.link-tool__content--rendered{
-  background:transparent !important;
+
+.ce-toolbar__plus ,
+.ce-toolbar__settings-btn,
+.link-tool__content--rendered,
+.ce-code__textarea,
+.ce-popover,
+.ce-popover-item,
+.ce-popover-item__icon ,
+.link-tool__input-holder--error .link-tool__input
+{
+  @apply !bg-background !text-foreground;
+}
+
+.ce-code__textarea {
+  @apply scrollbar-thin scrollbar-thumb-current scrollbar-thumb-rounded-sm
 }
 
 /* pre{

@@ -22,7 +22,7 @@ export default async function GeneralFeed({tabType}:GeneralFeedProps) {
     })
     return (
     <div className="flex flex-col gap-2 w-full h-full">
-    <h1 className="text-xs font-light">explore...</h1>
+    <h1 className="text-sm pt-2 font-light">what&apos;s happening ?...</h1>
     <Separator/>
     <PostFeed tabType={tabType} initialPosts={posts}/>
     </div>

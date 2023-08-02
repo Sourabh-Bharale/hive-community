@@ -36,7 +36,7 @@ export default function Post({subredditName,post,commentAmount,votesAmount,curre
                     {
                         subredditName ? (
                             <>
-                            <a className={buttonVariants({variant:"link"})} href={`/r/${subredditName}`}>r/{subredditName}</a>
+                            <a className={buttonVariants({variant:"link"})} href={`/hub/${subredditName}`}>hub/{subredditName}</a>
                             </>
                         ):null
                     }
@@ -46,19 +46,20 @@ export default function Post({subredditName,post,commentAmount,votesAmount,curre
                     </div>
                 </div>
 
-                <a href={`/r/${subredditName}/post/${post.id}`} className={cn('my-4',buttonVariants({variant:"link"}))}>
+                <a href={`/hub/${subredditName}/post/${post.id}`} className={cn('my-4',buttonVariants({variant:"link"}))}>
                     <h1 className="text-xl font-semibold py-2 ">
                         {post.title}
                     </h1>
                 </a>
-                <a href={`/r/${subredditName}/post/${post.id}`}>
+                <a href={`/hub/${subredditName}/post/${post.id}`}>
                 <div className="relative text-sm max-h-40 w-full overflow-clip p-4"
                 ref={pRef}>
 
                     <EditorOutput content={post.content}/>
-                    {pRef.current?.clientHeight===160 ? (
-                        <div className="absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-white dark:from-[#030711]  to-transparent"/>
-                    ):null}
+
+              {/* // blur bottom if content is too long */}
+              <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white dark:from-[#030711] to-transparent'></div>
+
                 </div>
                 </a>
             </div>
@@ -68,7 +69,7 @@ export default function Post({subredditName,post,commentAmount,votesAmount,curre
         <div className="block md:hidden">
             <PostVoteClient postId={post.id} initialVotesAmount={votesAmount} initialVote={currentVote?.type} />
         </div>
-        <a className={cn('gap-2',buttonVariants({variant:"link"}))} href={`/r/${subredditName}/post/${post.id}`}>
+        <a className={cn('gap-2',buttonVariants({variant:"link"}))} href={`/hub/${subredditName}/post/${post.id}`}>
             <MessageSquareIcon className="w-4 h-4"/>{commentAmount} comments
         </a>
 

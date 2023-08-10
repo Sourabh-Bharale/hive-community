@@ -53,7 +53,7 @@ export default function Post({subredditName,post,commentAmount,votesAmount,curre
                     </h1>
                 </a>
                 <a href={`/hub/${subredditName}/post/${post.id}`}>
-                <div className="relative text-sm max-h-96 w-full overflow-clip"
+                <div className="relative text-sm h-fit max-h-96 w-full overflow-clip"
                 ref={pRef}>
 
                     <EditorOutput content={post.content}/>

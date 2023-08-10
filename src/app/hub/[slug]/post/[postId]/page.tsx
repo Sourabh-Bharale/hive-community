@@ -92,8 +92,8 @@ export default async function Page({ params: { postId,slug } }: PageParams) {
             </Suspense>
 
             </div>
-            <div className=" flex flex-col justify-start overflow-x-clip p-4 rounded-sm">
-                <p className="max-h-40 mt-1 truncate text-xs">
+            <div className=" flex flex-col justify-start w-full overflow-x-clip p-4 rounded-sm">
+                <p className="max-h-40 w-full mt-1 truncate text-xs">
                     Posted by u/{post?.author.username ?? cachedPost.authorUsername}{" "}
                     {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
                 </p>

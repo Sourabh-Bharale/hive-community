@@ -100,7 +100,6 @@ interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
             )}
           </div>
         </CardContent>
-
             <CardFooter>
                 <Button isLoading={isLoading}>Change Username</Button>
             </CardFooter>

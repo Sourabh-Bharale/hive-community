@@ -1,8 +1,8 @@
 import CommentsSection from "@/components/CommentsSection"
 import EditorOutput from "@/components/EditorOutput"
+import WebShare from "@/components/WebShare"
 import PostVoteServer from "@/components/post-vote/PostVoteServer"
 import { Button } from "@/components/ui/Button"
-import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 import { db } from "@/lib/db"
@@ -43,7 +43,7 @@ export async function generateMetadata(
   }
 
 
-export default async function Page({ params: { postId } }: PageParams) {
+export default async function Page({ params: { postId,slug } }: PageParams) {
 
     const cachedPost = (
         await redis.hgetall(`post:${postId}`)
@@ -72,8 +72,8 @@ export default async function Page({ params: { postId } }: PageParams) {
 
     return (
         <div>
-        <div className=" flex flex-col sm:flex-row items-center sm:items-start justify-between">
-            <div className="md:order-first order-last">
+        <div className=" flex flex-col sm:flex-row items-center sm:items-start justify-start">
+            <div className="lg:flex hidden">
             <Suspense fallback={<PostVoteLoader />}>
                 {/* @ts-expect-error server component */}
                 <PostVoteServer
@@ -90,8 +90,9 @@ export default async function Page({ params: { postId } }: PageParams) {
                     }}
                 />
             </Suspense>
+
             </div>
-            <div className=" flex flex-col overflow-x-clip p-4 rounded-sm">
+            <div className=" flex flex-col justify-start overflow-x-clip p-4 rounded-sm">
                 <p className="max-h-40 mt-1 truncate text-xs">
                     Posted by u/{post?.author.username ?? cachedPost.authorUsername}{" "}
                     {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
@@ -110,7 +111,36 @@ export default async function Page({ params: { postId } }: PageParams) {
 
 
             </div>
+
         </div>
+        <Separator/>
+        <div className="flex justify-start gap-4 items-center pt-6">
+
+        <div className="flex lg:hidden">
+            <Suspense fallback={<PostVoteLoader />}>
+                {/* @ts-expect-error server component */}
+                <PostVoteServer
+                    postId={post?.id ?? cachedPost.id}
+                    getData={async () => {
+                        return await db.post.findUnique({
+                            where: {
+                                id: postId,
+                            },
+                            include: {
+                                votes: true,
+                            },
+                        })
+                    }}
+                />
+            </Suspense>
+
+            </div>
+        <div className="flex gap-2  justify-center items-center">
+            <h1 className="hidden lg:flex ">liked this post...? try sharing it with your friends </h1>
+            <WebShare post={post} subredditName={slug}/>
+            </div>
+            </div>
+
         <Suspense fallback={<Skeleton className="w-full h-full" />}>
                     {/* @ts-ignore server component */}
                     <CommentsSection postId={post?.id ?? cachedPost.id} />

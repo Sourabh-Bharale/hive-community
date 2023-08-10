@@ -7,6 +7,7 @@ import { MessageSquareIcon } from "lucide-react"
 import { cn } from '@/lib/utils'
 import EditorOutput from "./EditorOutput"
 import PostVoteClient from "./post-vote/PostVoteClient"
+import WebShare from "./WebShare"
 
 type PartialVote = Pick<Vote,'type'>
 
@@ -65,13 +66,16 @@ export default function Post({subredditName,post,commentAmount,votesAmount,curre
             </div>
         </div>
 
-        <div className="flex z-20 text-sm p-4 sm:px-6">
+        <div className="flex z-20 text-sm p-4 sm:px-6 items-center">
         <div className="block md:hidden">
             <PostVoteClient postId={post.id} initialVotesAmount={votesAmount} initialVote={currentVote?.type} />
         </div>
         <a className={cn('gap-2',buttonVariants({variant:"link"}))} href={`/hub/${subredditName}/post/${post.id}`}>
-            <MessageSquareIcon className="w-4 h-4"/>{commentAmount} comments
+            <MessageSquareIcon className="w-4 h-4"/>{commentAmount} <p className="hidden lg:flex ">comments</p>
         </a>
+        <div className="flex gap-2 justify-center items-center">
+            <WebShare post={post} subredditName={subredditName}/>
+        </div>
 
         </div>
     </div>

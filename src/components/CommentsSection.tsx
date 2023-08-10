@@ -30,7 +30,7 @@ export default async function CommentsSection({ postId }: CommentsSectionProps) 
     })
 
     return (
-        <div className="flex flex-col gap-y-4 mt-4">
+        <div className="flex flex-col gap-y-4">
             <Separator className="my-6" />
 
             {/* create comment */}

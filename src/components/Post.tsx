@@ -27,12 +27,12 @@ export default function Post({subredditName,post,commentAmount,votesAmount,curre
 
     return (
     <div className="rounded-md shadow border">
-        <div className="px-6 py-4 flex justify-between ">
+        <div className="px-2 py-4 flex justify-between ">
             <div className="md:block hidden">
             <PostVoteClient postId={post.id} initialVotesAmount={votesAmount} initialVote={currentVote?.type} />
             </div>
 
-            <div className="w-0 flex-col gap-2 flex-1">
+            <div className="w-0 h-full flex-col gap-2 flex-1">
                 <div className="flex flex-col  max-h-40 mt-1 text-xs truncate justify-start items-start">
                     {
                         subredditName ? (
@@ -53,14 +53,13 @@ export default function Post({subredditName,post,commentAmount,votesAmount,curre
                     </h1>
                 </a>
                 <a href={`/hub/${subredditName}/post/${post.id}`}>
-                <div className="relative text-sm max-h-40 w-full overflow-clip p-4"
+                <div className="relative text-sm max-h-96 w-full overflow-clip"
                 ref={pRef}>
 
                     <EditorOutput content={post.content}/>
 
               {/* // blur bottom if content is too long */}
               <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white dark:from-[#030711] to-transparent'></div>
-
                 </div>
                 </a>
             </div>

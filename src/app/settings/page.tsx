@@ -13,7 +13,7 @@ export default async function Page() {
     const session = await getAuthSession()
 
   return (
-    <div className="flex flex-col gap-4 max-w-4xl mx-auto py-12">
+    <div className="flex flex-col gap-4 md:max-w-4xl mx-auto py-12">
         <div className="grid items-start">
             <h1 className="flex items-center gap-2 font-bold text-3xl md:text-4xl">
                 <SettingsIcon className="w-6 h-6"/>

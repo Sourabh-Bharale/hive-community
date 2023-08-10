@@ -28,16 +28,16 @@ export default function CreateNewCommunity() {
             if (error instanceof AxiosError) {
                 if (error.response?.status === 409) {
                     return toast({
-                        title: 'Subreddit already exists.',
-                        description: 'Please choose a different subreddit name',
+                        title: 'Hub already exists.',
+                        description: 'Please choose a different Hub name',
                         variant: 'destructive'
                     })
                 }
 
                 if (error.response?.status === 422) {
                     return toast({
-                        title: 'Invalid Subreddit name',
-                        description: 'Please choose a Subreddit name between 3 and 21 characters',
+                        title: 'Invalid Hub name',
+                        description: 'Please choose a Hub name between 3 and 21 Alphanumeric characters only (special characters not allowed)',
                         variant: 'destructive'
                     })
                 }
@@ -48,7 +48,7 @@ export default function CreateNewCommunity() {
             }
             return toast({
                 title: 'An Error Occured :(',
-                description: 'Could not create subreddit, please try again in some time',
+                description: 'Could not create Hub, please try again in some time',
                 variant: 'destructive'
             })
 

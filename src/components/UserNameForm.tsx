@@ -52,6 +52,13 @@ interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
             variant: 'destructive',
           })
         }
+        if (err.response?.status === 422) {
+          return toast({
+              title: 'Invalid user name',
+              description: 'A valid username is between 3 and 21 Alphanumeric characters only (special characters not allowed)',
+              variant: 'destructive'
+          })
+      }
       }
 
       return toast({

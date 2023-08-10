@@ -98,7 +98,7 @@ interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
             </Label>
             <Input
               id='name'
-              className='w-[400px] pl-6'
+              className='pl-6'
               size={32}
               {...register('name')}
             />

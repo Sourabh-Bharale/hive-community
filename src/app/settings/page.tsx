@@ -1,4 +1,8 @@
+
+import Theme from "@/components/Theme"
 import { UserNameForm } from "@/components/UserNameForm"
+import { Separator } from "@/components/ui/separator"
+import { Skeleton } from "@/components/ui/skeleton"
 import { getAuthSession } from "@/lib/auth"
 import { SettingsIcon } from "lucide-react"
 import { Metadata } from "next"
@@ -28,9 +32,10 @@ export default async function Page() {
                 // @ts-ignore
                 username:session.user.username||''
             }
-
             }/>
         </div>
+        <Separator/>
+            <Theme/>
     </div>
   )
 }

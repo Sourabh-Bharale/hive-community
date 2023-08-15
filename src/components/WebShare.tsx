@@ -37,9 +37,7 @@ export default function WebShare({ subredditName, post }: WebShareProps) {
       }
     } catch (error) {
       return toast({
-        title:'An unknown error occured :(',
-        description:'Could not share this post or successfully copy it to clipboard',
-        variant:'destructive'
+        description:'Could not share this post or copy it to clipboard',
       })
     }
   }

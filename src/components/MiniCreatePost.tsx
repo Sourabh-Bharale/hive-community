@@ -36,6 +36,7 @@ export default function MiniCreatePost({session}:MiniCreatePostProps) {
                 <Button
                  onClick={()=>router.push(`${pathname}/submit`)}
                  variant={"ghost"}
+                 className="md:flex hidden"
                 >
                     <PhotoIcon className="w-6 h-6"/>
                 </Button>
@@ -43,6 +44,7 @@ export default function MiniCreatePost({session}:MiniCreatePostProps) {
                 <Button
                  onClick={()=>router.push(`${pathname}/submit`)}
                  variant={"ghost"}
+                 className="md:flex hidden"
                 >
                     <LinkIcon className="w-6 h-6"/>
                 </Button>

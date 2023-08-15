@@ -53,16 +53,15 @@ export default async function Layout({ children, params: { slug } }: LayoutProps
     })
 
     return (
-        <div className="sm:container max-w-7xl mx-auto h-full pt-12">
-            <div className="">
+        <div className="flex flex-col lg:flex-row w-full mx-auto h-full ">
                 {/* todo back */}
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6">
-                    <div className="flex flex-col col-span-2 space-y-6">
+                <div className="flex flex-col lg:flex-row w-full gap-4 py-6">
+                    <div className="flex w-full flex-col col-span-2 space-y-6">
                         {children}
                     </div>
                     {/* info sidebar */}
-                    <div className="hidden md:block overflow-hidden h-fit rounded-lg border order-first md:order-last">
+                    <div className="flex flex-col w-full lg:max-w-xs h-fit rounded-lg border lg:order-last order-first ml-auto">
                         <div className="px-6 py-4">
                             <p className="font-semibold py-3">About hub/{subreddit.name}</p>
                         </div>
@@ -110,11 +109,10 @@ export default async function Layout({ children, params: { slug } }: LayoutProps
                                 href={`hub/${slug}/submit`}>
                                 Create Post
                             </Link>
-                            
+
                         </dl>
                     </div>
                 </div>
             </div>
-        </div>
     )
 }
